@@ -1,13 +1,27 @@
 import "./config";
 
-import "@dojo/framework/shim/Promise";
 
-import App from "./widgets/App";
+Promise.all([
+  import('esri/Map'),
+  import('esri/views/MapView'),
+  import('esri/layers/FeatureLayer'),
+]).then(([Map, View, FeatureLayer]) => {
+  
+  const map = new Map.default({
+      basemap: 'streets-vector',
+  });
 
-/**
- * Initialize application
- */
-export const app = new App({
-  appName: "Demo App",
-  container: document.getElementById("app") as HTMLElement
+  const el = document.createElement('div');
+  el.style = 'height: 300px;';
+  el.classList.add('app');
+  document.body.appendChild(el);
+  const view = new View.default({
+      map,
+      container: el,
+  });
+
+  const layer = new FeatureLayer.default({
+      portalItem: {id: 'b234a118ab6b4c91908a1cf677941702'}
+  });
+  view.map.add(layer);
 });
