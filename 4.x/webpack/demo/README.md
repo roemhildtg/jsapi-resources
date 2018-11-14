@@ -35,4 +35,6 @@ Watch the app fail! Open the console to make sure
 
 ### What's happening here?
 
+Look at https://github.com/roemhildtg/jsapi-resources/blob/master/4.x/webpack/demo/src/index.ts
+
 The `import('esri/...')` code is a dynamic import. Webpack recognizes this and automatically splits it into its own bundle. This is used for optimization so that we can dynamically load modules as they are needed. This is causing some issue with either the JS API, Dojo webpack plugin, Or some combination between that and the web workers in the API. 
